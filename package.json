@@ -1,0 +1,29 @@
+{
+  "name": "searchparty",
+  "version": "1.0.0",
+  "description": "Party is the search.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecdemis123/SearchParty.git"
+  },
+  "author": "EnglishMuffinLLC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ecdemis123/SearchParty/issues"
+  },
+  "homepage": "https://github.com/ecdemis123/SearchParty#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.0",
+    "cypher-stream": "^0.3.0",
+    "express": "^4.13.4",
+    "jwt-simple": "^0.5.0",
+    "method-override": "^2.3.5",
+    "morgan": "^1.7.0",
+    "shortid": "^2.2.4"
+  }
+}
