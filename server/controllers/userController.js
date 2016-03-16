@@ -2,7 +2,7 @@
 const jwt = require('jwt-simple');
 const bcrypt = require('bcrypt-nodejs');
 const neo = require('../db/neo.js');
-const secret = require('../server.js');
+const config = require('../db/config/config.js');
 const shortID = require('shortid');
 
 module.exports = {
@@ -13,6 +13,7 @@ module.exports = {
 
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, null, (err, hash) => {
+        //extract user info from request and assign to some object
         let userProperties = {
           username: req.body.username,
           password: hash,
@@ -23,10 +24,10 @@ module.exports = {
         };
         //adding to the db happens here
         //TODO: Add cypher query syntax
-        let createUserQuery = `CREATE (${user.userID}:User { ${userProperties} })`
+        let createUserQuery = `CREATE (${user.userID}:User ${userProperties})`
         neo.runCypherStatementPromise(createUserQuery);
 
-        let token = jwt.encode({username: username}, secret);
+        let token = jwt.encode({username: username}, config.secret);
         res.send(token);
       })
     })
@@ -42,15 +43,15 @@ module.exports = {
     //checking the database to see if the user exists
     neo.runCypherStatementPromise(checkUsernameQuery)
     .then((err, data) => {
-      //if the user exists
       let userObject = data[0];
+      //if the user exists
       if(userObject.username) {
         //then compare the password
         bcrypt.compare(password, userObject.password, (err, result) => {
           //if it is the correct password
           if(result) {
             //assign a token and send back that token
-            let token = jwt.encode({username: userObject.username}, secret);
+            let token = jwt.encode({username: userObject.username}, config.secret);
             res.send(token);
             //if it is not the correct password
           } else {
