@@ -1,0 +1,92 @@
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Search Party</ion-title>
+</ion-navbar>
+
+
+<ion-content class="login" *ngIf="!auth.authenticated()">
+
+      <div padding>
+        <ion-segment [(ngModel)]="authType">
+          <ion-segment-button value="login">
+            Login
+          </ion-segment-button>
+          <ion-segment-button value="signup">
+            Signup
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div [ngSwitch]="authType">
+        <form *ngSwitchWhen="'login'" #loginCreds="ngForm" (ngSubmit)="login(loginCreds.value)">
+
+          <ion-item>
+            <ion-label>Username</ion-label>
+            <ion-input type="text" ngControl="username"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password" ngControl="password"></ion-input>
+          </ion-item>
+
+          <div padding>
+            <button block type="submit">Login</button>
+          </div>
+
+        </form>
+
+        <form *ngSwitchWhen="'signup'" #signupCreds="ngForm" (ngSubmit)="signup(signupCreds.value)">
+
+          <span class="name">
+          <ion-item>
+            <ion-label>First Name</ion-label>
+            <ion-input type="text" ngControl="firstname"></ion-input>
+          </ion-item>
+          </span>
+
+          <span class="name">
+          <ion-item>
+            <ion-label>Last Name</ion-label>
+            <ion-input type="text" ngControl="lastname"></ion-input>
+          </ion-item>
+          </span>
+          <br><br>
+          <span class="name">
+          <ion-item>
+            <ion-label>Username</ion-label>
+            <ion-input type="text" ngControl="username"></ion-input>
+          </ion-item>
+          </span>
+
+          <span class="name">
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input type="text" ngControl="email"></ion-input>
+          </ion-item>
+          </span>
+          <br><br>
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password" ngControl="password"></ion-input>
+          </ion-item>
+
+          <div padding>
+            <button block type="submit">Signup</button>
+          </div>
+
+        </form>
+      </div>
+
+      <div padding>
+        <p *ngIf="error" class="error">{{ error._body }}</p>
+      </div>
+
+  </ion-content>
+
+  <!-- <ion-content>
+    <div *ngIf="auth.authenticated()">
+
+  </ion-content> -->

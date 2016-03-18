@@ -1,0 +1,37 @@
+<ion-navbar *navbar>
+  <button menuToggle *ngIf="!selectedItem">
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Current Task</ion-title>
+</ion-navbar>
+
+<ion-content class="has-header cards-bg">
+  
+  <ion-card class="adv-map">
+    <div style="position: relative">
+      <ion-item>
+        <!--set to local storage from server response-->
+        <!--place name -->
+        <h2>Location Name</h2> 
+        <!--place address-->
+        <h2>Location Address</h2> 
+      </ion-item>
+      <!-- put google map here -->
+      <div id="map"></div>
+    </div>
+    <ion-item>
+      <ion-icon subtle large item-left name='ios-pint'></ion-icon>
+      <!---challenge-->
+      <h3>Current challenge</h3>
+      <p>challenge info goes here</p> 
+    </ion-item>
+    <ion-item>
+      <ion-label>Mark Complete</ion-label>
+      <ion-checkbox secondary checked="false" (click)="markComplete()"></ion-checkbox>
+    </ion-item>
+    <button primary clear item-right *ngIf="completeToggle" (click)="getNewTask()">  
+      Next Task
+    </button>
+  </ion-card>
+
+</ion-content>
