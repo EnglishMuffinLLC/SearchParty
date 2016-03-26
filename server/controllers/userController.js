@@ -6,12 +6,8 @@ const neo = require('../db/neo.js');
 const userInfo = require('../lib/user/showUserHuntsAndInfo.js');
 const userAuth = require('../lib/user/signUpAndSignIn.js')
 const friends = require('../lib/user/friends.js');
-
-if(!process.env.JWTSECRET) {
-  var config = require('../config/config.js');
-}
-
-const secret = process.env.JWTSECRET || config.secret;
+const config = require('../config/config.js');
+const secret = config.secret;
 
 
 function error(error) {

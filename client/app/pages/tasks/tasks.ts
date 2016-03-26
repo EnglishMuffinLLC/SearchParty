@@ -39,8 +39,8 @@ export class TaskPage {
   previousTasks: any;
   huntID: any;
   finalDist: any;
-  TASKS_URL: string = process.env.TASKSURL || 'http://localhost:8000/tasks';
-  FEEDBACK_URL: string = process.env.FEEDBACKURL || 'http://localhost:8000/feedback';
+  TASKS_URL: string = '/tasks';
+  FEEDBACK_URL: string = '/feedback';
   feedback: string;
 
   constructor(private nav: NavController, navParams: NavParams, private _taskService: TaskService, private googleMaps: GoogleMapService) {

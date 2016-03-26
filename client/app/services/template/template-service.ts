@@ -6,8 +6,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TemplateService {
-  TEMPLATES_URL: string = process.env.TEMPLATESURL || 'http://localhost:8000/templates'; //update this later
-  TASKS_URL: string = process.env.TASKSURL || 'http://localhost:8000/tasks';
+  TEMPLATES_URL: string = '/templates'; //update this later
+  TASKS_URL: string = '/tasks';
   keyword: string;
   contentHeader: Headers = new Headers({'Content-Type': 'application/json'});
   

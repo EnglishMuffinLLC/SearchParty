@@ -14,8 +14,8 @@ import 'rxjs/add/operator/map';
 })
 
 export class LogIn {
-  LOGIN_URL: string = process.env.SIGNINURL || 'http://localhost:8000/signin'; //update this later
-  SIGNUP_URL: string = process.env.SIGNUPURL || 'http://localhost:8000/signup';
+  LOGIN_URL: string = '/signin'; //update this later
+  SIGNUP_URL: string = '/signup';
   // When the page loads, we want the Login segment to be selected
   authType: string = 'login';
   // We need to set the content type for the server

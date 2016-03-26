@@ -1,13 +1,9 @@
 'use strict'
 const host = '159.203.239.26';
 const port = 7474;
-// const config = require('../config/config.js');
-
- if(!process.env.NEOUSERNAME) {
-   var config = require('../config/config.js');
- }
-const password = process.env.NEOPASSWORD || config.neoPassword;
-const username = process.env.NEOUSERNAME || config.neoUsername;
+const config = require('../config/config.js');
+const password = config.neoPassword;
+const username = config.neoUsername;
 
 const cypher = require('cypher-stream')(`http://${username}:${password}@${host}:${port}`);
 

@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ProfileService {
-  PROFILE_URL: string = process.env.TEMPLATESURL || 'http://localhost:8000/userProfile'; //update this later
+  PROFILE_URL: string = '/userProfile'; //update this later
   contentHeader: Headers = new Headers({'Content-Type': 'application/json'});
   
   constructor(private _http:Http) {}
