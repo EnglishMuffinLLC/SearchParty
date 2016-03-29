@@ -23,13 +23,11 @@
         <form *ngSwitchWhen="'login'" #loginCreds="ngForm" (ngSubmit)="login(loginCreds.value)">
 
           <ion-item>
-            <ion-label>Username</ion-label>
-            <ion-input type="text" ngControl="username"></ion-input>
+            <ion-input placeholder="username" type="text" ngControl="username"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label>Password</ion-label>
-            <ion-input type="password" ngControl="password"></ion-input>
+            <ion-input placeholder="password" type="password" ngControl="password"></ion-input>
           </ion-item>
 
           <div padding>
@@ -42,35 +40,30 @@
 
           <span class="name">
           <ion-item>
-            <ion-label>First Name</ion-label>
-            <ion-input type="text" ngControl="firstname"></ion-input>
+            <ion-input placeholder="first name" type="text" ngControl="firstname"></ion-input>
           </ion-item>
           </span>
 
           <span class="name">
           <ion-item>
-            <ion-label>Last Name</ion-label>
-            <ion-input type="text" ngControl="lastname"></ion-input>
+            <ion-input placeholder="last name" type="text" ngControl="lastname"></ion-input>
           </ion-item>
           </span>
           <br><br>
           <span class="name">
           <ion-item>
-            <ion-label>Username</ion-label>
-            <ion-input type="text" ngControl="username"></ion-input>
+            <ion-input placeholder="username" type="text" ngControl="username"></ion-input>
           </ion-item>
           </span>
 
           <span class="name">
           <ion-item>
-            <ion-label>Email</ion-label>
-            <ion-input type="text" ngControl="email"></ion-input>
+            <ion-input placeholder="email" type="text" ngControl="email"></ion-input>
           </ion-item>
           </span>
           <br><br>
           <ion-item>
-            <ion-label>Password</ion-label>
-            <ion-input type="password" ngControl="password"></ion-input>
+            <ion-input placeholder="password" type="password" ngControl="password"></ion-input>
           </ion-item>
 
           <div padding>
