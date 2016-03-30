@@ -18,68 +18,81 @@ import {ChatService} from '../../services/chat/chat-service';
   directives: [FORM_DIRECTIVES]
 })
 export class Chat {
-   messages: any;
-   socket: any;
-   zone: any;
-   chatBox: any;
-   io: any;
-   username: any;
-   timeout: any;
-   timoutFunction: any;
-   jwtHelper: JwtHelper = new JwtHelper();
-   typing: boolean;
-   ADD_MESSAGE_URL: string = 'http://localhost:8000/addChatMessage';
-   GET_MESSAGES_URL: string = 'https://getsearchparty.com/getChatMessages';
-   huntID: any;
+  messages: any;
+  socket: any;
+  zone: any;
+  chatBox: any;
+  io: any;
+  username: any;
+  timeout: any;
+  timoutFunction: any;
+  jwtHelper: JwtHelper = new JwtHelper();
+  typing: boolean;
+  ADD_MESSAGE_URL: string = 'http://localhost:8000/addChatMessage';
+  GET_MESSAGES_URL: string = 'http://localhost:8000/getChatMessages';
+  huntID: any;
 
 
-   constructor(
-      private http: Http,
-      private nav: NavController,
-      navParams: NavParams,
-      private _chatService: ChatService
-   ) {
-     let socket = io.connect('http://localhost:8000');
-     this.timeout = undefined;
-     this.typing = false;
+  constructor(
+    private http: Http,
+    private nav: NavController,
+    navParams: NavParams,
+    private _chatService: ChatService
+  ) {
+    let socket = io.connect('http://localhost:8000');
+    this.timeout = undefined;
+    this.typing = false;
 
-     this.token = localStorage.id_token;
-     if (this.token) {
-       this.username = this.jwtHelper.decodeToken(this.token).username;
-     }
+    this.token = localStorage.id_token;
+    if (this.token) {
+      this.username = this.jwtHelper.decodeToken(this.token).username;
+    }
 
-     this.huntID = navParams.get('huntID');
+    this.huntID = navParams.get('huntID');
 
-     this.messages = [];
-     this.zone = new NgZone({enableLongStackTrace: false});
-     this.chatBox = "";
-     this.socket = socket;
-     this.socket.on("chat_message", (msg, username) => {
-       this.zone.run(() => {
-          console.log(this.messages);
-         this.messages.push([username +": "+ msg]);
-       });
-   });
-}
+    this.messages = [];
+    this.zone = new NgZone({enableLongStackTrace: false});
+    this.chatBox = "";
+    this.socket = socket;
+    this.socket.on("chat_message", (msg, username) => {
+      this.zone.run(() => {
+        console.log(this.messages);
+        this.messages.push([username +": "+ msg]);
+      });
+    });
 
-   timeoutFunction() {
-      this.typing = false;
-      this.socket.emit('typing', false);
-   }
+    let huntIDObject = {huntID: this.huntID};
+    this._chatService.postData(JSON.stringify(huntIDObject), this.GET_MESSAGES_URL)
+    .then(messagesFromDB => {
+      this.zone.run(() => {
+        console.log("messages from DB", messagesFromDB);
+        let messagesArray = messagesFromDB.chatMessages;
+        for(let i = 0; i < messagesArray.length; i++) {
+          this.messages.push([messagesArray[i].username + ": " + messagesArray[i].text]);
+        }
+      })
+    }).catch(error => console.error(error));
+
+  }
+
+  timeoutFunction() {
+    this.typing = false;
+    this.socket.emit('typing', false);
+  }
 
   OnKey(event:KeyboardEvent) {
-     console.log('this is the keyup event ', event);
-     if (event) {
-        console.log('ln 84: ', this.typing);
-        if (this.typing === false) {
-           this.typing = true;
-           console.log('emitting true for typing', this.typing);
-           this.socket.emit('typing', true);
-           clearTimeout(this.timeout);
-           this.timeout = setTimeout(this.timeoutFunction.bind(this), 1500);
-        }
-     }
- }
+    console.log('this is the keyup event ', event);
+    if (event) {
+      console.log('ln 84: ', this.typing);
+      if (this.typing === false) {
+        this.typing = true;
+        console.log('emitting true for typing', this.typing);
+        this.socket.emit('typing', true);
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(this.timeoutFunction.bind(this), 1500);
+      }
+    }
+  }
 
   send(message) {
     if (message && message !== "") {

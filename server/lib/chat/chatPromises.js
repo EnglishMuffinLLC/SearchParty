@@ -30,17 +30,17 @@ module.exports = {
     }).catch(error => console.error(error));
   },
 
-  retrieveChatMessages: chatID => {
+  retrieveChatMessages: huntID => {
     const retrieveChatQuery =
-    `MATCH (chat:Chatroom{chatID:"${chatID}"})
+    `MATCH (:Hunt{huntID:"${huntID}"})-[:HAS_CHAT]->(chat)
     WITH chat
-    MATCH (chat)-[:CURRENT]-(latestmessage)-[:NEXT*0..28]-(oldermessages)
+    MATCH (chat)-[:CURRENT]-(latestmessage)-[:NEXT*0..10]-(oldermessages)
     RETURN oldermessages ORDER BY oldermessages.datetime`;
 
     return neo4jPromise.databaseQueryPromise(retrieveChatQuery)
     .then(chatMessageArray => {
       return new Promise((resolve, reject) => {
-        if(chatMessageArray.length > 0) {
+        if(chatMessageArray) {
           resolve(chatMessageArray);
         } else {
           reject({"error": "could not retrieve chat messages"});
