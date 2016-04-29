@@ -2,3 +2,11 @@ node_modules
 server/config
 npm-debug.log
 .aws
+key.pem
+getsearchparty_com.ca-bundle
+cert.pem
+server.crt
+._*
+splash-page/js/modernizer.js
+splash-page/js/jquery.js
+splash-page/js/html5shiv.js

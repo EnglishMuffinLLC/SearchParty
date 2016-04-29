@@ -34,8 +34,16 @@ Requirements
 ----
 
 Node v5.8.0+, Typscript, and Ionic 2 beta are required.
-As of 3/28/16, the line ///<reference path='../node/index.d.ts' /> needs to be added to the typings definition of socket.io
-As of 3/29/16, the line ///<reference path="../moment-node/index.d.ts" /> needs to be added to typings defintion of moment
+ * As of 3/28/16, the line
+  ```
+   ///<reference path='../node/index.d.ts' />
+  ```  
+   needs to be added to the typings definition of socket.io.
+ * As of 3/29/16, the line 
+   ```
+   ///<reference path="../moment-node/index.d.ts" />
+   ```
+   needs to be added to typings defintion of moment.
 
 
 Demo
@@ -136,4 +144,4 @@ If you would like to submit a pull request, please make an effort to follow the 
 
 Thanks for checking our app out!
 
-– EnglishMuffinLLC Dev Team (Cam, Ellie, Ethaniel, & Monica)
+– EnglishMuffinLLC Dev Team ([Cam](https://github.com/camroark), [Ellie](https://github.com/ecdemis123), [Ethaniel](https://github.com/ethanrubio), & [Monica](https://github.com/monicagrandy))

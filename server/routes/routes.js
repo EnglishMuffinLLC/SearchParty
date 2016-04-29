@@ -8,7 +8,8 @@ const urlController = require('../controllers/urlController.js');
 module.exports = (app, express) => {
 
   app.use(jsonParser);
-  app.use('/', express.static('./client/www'));
+  app.use('/', express.static('./splash-page'));
+  app.use('/app', express.static('./client/www'));
   app.use('/share', express.static('./public-share/'));
 
   app.post('/feedback', jsonParser, huntController.feedback);

@@ -15,6 +15,25 @@ export class LogIn {
   jwtHelper: JwtHelper = new JwtHelper();
   local: Storage = new Storage(LocalStorage);
   user: string;
+  slides = [
+    {
+      title: "Welcome to Search Party!",
+      description: "A modern scavenger hunt application. Never ask 'so what are we doing tonight?' again.",
+      image: "img/searchpartylogoicon.png",
+    },
+    {
+      title: "Go on a hunt!",
+      description: "Have a blast while you complete tasks at different locations, and don't forget to upload pictures directly to your hunt!",
+      image: "img/hunt.png",
+    },
+    {
+      title: "Share your hunt!",
+      description: "Use the generated url to share a live stream of the hunt, directly to twitter or to your favorite social media platform.",
+      image: "img/share.png",
+    }
+  ];
+  options: any;
+  slider: any;
 
   constructor(
     private nav: NavController, 
@@ -25,6 +44,16 @@ export class LogIn {
     if(token) {
       this.user = this.jwtHelper.decodeToken(token).username;
     }
+    this.options = {
+      onlyExternal: false,
+      onInit: (slides: any) => {
+        this.slider = slides;    
+      }
+    }
+  }
+  
+  skip() {
+    this.slider.slideTo(3, 250);
   }
 
   getCoords(){

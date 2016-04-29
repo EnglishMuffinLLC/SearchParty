@@ -37,7 +37,7 @@ export class AppComponent {
 
   constructor(private _urlService: UrlService) {
     // comment urlService for deployment
-    // this.urlService.grabUrls()
+    // this._urlService.grabUrls()
     //   .then(urls => {
     //     for (let key in urls) {
     //       localStorage.setItem(key, urls[key]);

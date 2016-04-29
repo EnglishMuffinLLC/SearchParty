@@ -5,9 +5,22 @@
   <ion-title>Search Party</ion-title>
 </ion-navbar>
 
-
-<ion-content class="login" *ngIf="!_auth.authenticated()">
-
+<ion-content class="tutorial-page">
+  <ion-slides pager [options]="options">
+    <ion-slide *ngFor="#slide of slides">
+      <ion-toolbar>
+        <ion-buttons end>
+          <button (click)="skip()">Skip</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <img [src]="slide.image" class="slide-image"/>
+      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <h2 class="slide-title">Ready to start your adventure?</h2>
       <div padding>
         <ion-segment [(ngModel)]="authType">
           <ion-segment-button value="login">
@@ -18,63 +31,44 @@
           </ion-segment-button>
         </ion-segment>
       </div>
-
       <div [ngSwitch]="authType">
         <form *ngSwitchWhen="'login'" #loginCreds="ngForm" (ngSubmit)="login(loginCreds.value)">
-
           <ion-item>
             <ion-input placeholder="username" type="text" ngControl="username"></ion-input>
           </ion-item>
-
           <ion-item>
             <ion-input placeholder="password" type="password" ngControl="password"></ion-input>
           </ion-item>
-
           <div padding>
             <button block type="submit">Login</button>
           </div>
-
         </form>
-
         <form *ngSwitchWhen="'signup'" #signupCreds="ngForm" (ngSubmit)="signup(signupCreds.value)">
-
-          <span class="name">
           <ion-item>
             <ion-input placeholder="first name" type="text" ngControl="firstname"></ion-input>
           </ion-item>
-          </span>
-
-          <span class="name">
           <ion-item>
             <ion-input placeholder="last name" type="text" ngControl="lastname"></ion-input>
           </ion-item>
-          </span>
-          <br><br>
-          <span class="name">
           <ion-item>
             <ion-input placeholder="username" type="text" ngControl="username"></ion-input>
           </ion-item>
-          </span>
-
-          <span class="name">
           <ion-item>
             <ion-input placeholder="email" type="text" ngControl="email"></ion-input>
           </ion-item>
-          </span>
-          <br><br>
           <ion-item>
             <ion-input placeholder="password" type="password" ngControl="password"></ion-input>
           </ion-item>
-
           <div padding>
             <button block type="submit">Signup</button>
           </div>
-
         </form>
       </div>
-
       <div padding>
         <p *ngIf="error" class="error">There is a problem with your login credentials. Please try again</p>
       </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
 
-  </ion-content>
+
