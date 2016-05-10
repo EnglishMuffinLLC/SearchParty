@@ -18,7 +18,6 @@ module.exports = {
     `MATCH (user:User{username:"${username}"})
     CREATE (user)-[:PARTICIPATED_IN]->(hunt:Hunt{huntID:"${huntID}", starttime:${huntStartTime}, huntname:"${huntName}", tasknumber: 0, totalnumberoftasks:${taskNumber}, templatename:"${templateName}"})-[:HAS_CHAT]->(:Chatroom{chatID:"${chatID}"}) RETURN hunt`;
 
-
     return neo4jPromise.databaseQueryPromise(initializeHuntQuery);
   }
 }
